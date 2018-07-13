@@ -1,1 +1,1 @@
-console.log('Bienvenue sur WebPack!')
+console.log('Bienvenue sur WebPack!');

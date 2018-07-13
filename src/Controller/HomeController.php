@@ -19,6 +19,6 @@ class HomeController extends AbstractController
      */
     public function testWebpack()
     {
-        return $this->render('Home/testWebpack.html.twig');
+        return $this->render('home/testWebpack.html.twig');
     }
 }
