@@ -19,6 +19,6 @@ class HomeMinController extends AbstractController
      */
     public function testWebpack()
     {
-        return $this->render('homeMin/accueil.html.twig');
+        return $this->render('homeMin/home.html.twig');
     }
 }
