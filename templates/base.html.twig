@@ -9,8 +9,8 @@
 <body>
 <div class="container-fluid">
     {% block body %}{% endblock %}
-    <script src="{{ asset('build/js/app.js') }}"></script>
-    {% block javascripts %}{% endblock %}
 </div>
+{% block javascripts %}{% endblock %}
+<script src="{{ asset('build/js/app.js') }}"></script>
 </body>
 </html>
