@@ -12,13 +12,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
-class HomeController extends AbstractController
+class HomeMinController extends AbstractController
 {
     /**
      * @Route("/accueil")
      */
     public function testWebpack()
     {
-        return $this->render('home/accueil.html.twig');
+        return $this->render('homeMin/accueil.html.twig');
     }
 }
