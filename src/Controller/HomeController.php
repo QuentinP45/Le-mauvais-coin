@@ -13,18 +13,26 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
-class HomeMinController extends AbstractController
+class HomeController extends AbstractController
 {
     /**
-     * @Route("/accueil")
+     * @Route("/", name="index")
      */
     public function home()
     {
         $offers = $this->getDoctrine()->getManager()
             ->getRepository(Offer::class)->findLastOffers();
 
-        return $this->render('homeMin/home.html.twig', [
+        return $this->render('home/homeMin.html.twig', [
             'offers' => $offers
         ]);
+    }
+
+    /**
+     * @Route("/admin", name="admin")
+     */
+    public function admin()
+    {
+        return $this->render('admin/home.html.twig');
     }
 }

@@ -3,89 +3,162 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Table(name="user")
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @var int
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(type="string")
      */
-    private $user_name;
+    private $fullName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(type="string", unique=true)
      */
-    private $password;
+    private $username;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     *
+     * @ORM\Column(type="string", unique=true)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(type="string")
      */
-    private $city;
+    private $password;
 
-    public function getId()
+    /**
+     * @var array
+     *
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getUserName(): ?string
+    public function setFullName(string $fullName): void
     {
-        return $this->user_name;
+        $this->fullName = $fullName;
     }
 
-    public function setUserName(string $user_name): self
+    public function getFullName(): string
     {
-        $this->user_name = $user_name;
-
-        return $this;
+        return $this->fullName;
     }
 
-    public function getPassword(): ?string
+    public function getUsername(): string
     {
-        return $this->password;
+        return $this->username;
     }
 
-    public function setPassword(string $password): self
+    public function setUsername(string $username): void
     {
-        $this->password = $password;
-
-        return $this;
+        $this->username = $username;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function setEmail(?string $email): self
+    public function setEmail(string $email): void
     {
         $this->email = $email;
-
-        return $this;
     }
 
-    public function getCity(): ?string
+    public function getPassword(): string
     {
-        return $this->city;
+        return $this->password;
     }
 
-    public function setCity(string $city): self
+    public function setPassword(string $password): void
     {
-        $this->city = $city;
+        $this->password = $password;
+    }
 
-        return $this;
+    /**
+     * Retourne les rôles de l'user
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+
+        // Afin d'être sûr qu'un user a toujours au moins 1 rôle
+        if (empty($roles)) {
+            $roles[] = 'ROLE_USER';
+        }
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): void
+    {
+        $this->roles = $roles;
+    }
+
+    /**
+     * Retour le salt qui a servi à coder le mot de passe
+     *
+     * {@inheritdoc}
+     */
+    public function getSalt(): ?string
+    {
+        // See "Do you need to use a Salt?" at https://symfony.com/doc/current/cookbook/security/entity_provider.html
+        // we're using bcrypt in security.yml to encode the password, so
+        // the salt value is built-in and you don't have to generate one
+
+        return null;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * {@inheritdoc}
+     */
+    public function eraseCredentials(): void
+    {
+        // Nous n'avons pas besoin de cette methode car nous n'utilions pas de plainPassword
+        // Mais elle est obligatoire car comprise dans l'interface UserInterface
+        // $this->plainPassword = null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function serialize(): string
+    {
+        return serialize([$this->id, $this->username, $this->password]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function unserialize($serialized): void
+    {
+        [$this->id, $this->username, $this->password] = unserialize($serialized, ['allowed_classes' => false]);
     }
 }
