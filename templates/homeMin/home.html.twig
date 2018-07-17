@@ -5,9 +5,15 @@
     {% include "homeMin/navbarMin.html.twig" %}
 
     <div class="row">
-        <div class="col-sm-12">
-            <h1 class="text-center">Page d'accueil quand je ne suis pas connecté</h1>
-        </div>
+        {% for offer in offers %}
+            <div class="col-sm-4 col-md-3">
+                <img src="http://via.placeholder.com/350x150" alt="Avatar" style="width:100%">
+                <div class="">
+                    <h4><b>{{ offer.title }}</b></h4>
+                    <p>{{ offer.details }}</p>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 
 {% endblock %}

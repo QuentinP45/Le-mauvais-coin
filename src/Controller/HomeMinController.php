@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Offer;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -17,8 +18,13 @@ class HomeMinController extends AbstractController
     /**
      * @Route("/accueil")
      */
-    public function testWebpack()
+    public function home()
     {
-        return $this->render('homeMin/home.html.twig');
+        $offers = $this->getDoctrine()->getManager()
+            ->getRepository(Offer::class)->findLastOffers();
+
+        return $this->render('homeMin/home.html.twig', [
+            'offers' => $offers
+        ]);
     }
 }
