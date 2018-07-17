@@ -20,11 +20,11 @@ class HomeMinController extends AbstractController
      */
     public function home()
     {
-        $em = $this->getDoctrine()->getManager()
+        $offers = $this->getDoctrine()->getManager()
             ->getRepository(Offer::class)->findLastOffers();
 
         return $this->render('homeMin/home.html.twig', [
-            'em' => $em
+            'offers' => $offers
         ]);
     }
 }
