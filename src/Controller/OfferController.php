@@ -8,12 +8,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class OfferController extends Controller
 {
     /**
-     * @Route("/offer", name="offer")
+     * @Route("/list-user", name="index_offers_user")
      */
     public function index()
     {
-        return $this->render('offer/index.html.twig', [
-            'controller_name' => 'OfferController',
+        return $this->render('user/index.html.twig', [
+
         ]);
     }
 }
