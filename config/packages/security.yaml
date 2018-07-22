@@ -29,7 +29,7 @@ security:
                 # Securisation des formulaires
                 csrf_token_generator: security.csrf.token_manager
                 # La page par defaut apres une connexion reussie
-                default_target_path: admin
+                default_target_path: user
 
             logout:
                 # La route où se trouve le process de deconnexion
@@ -41,8 +41,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-       - { path: ^/admin, roles: ROLE_ADMIN }
-       - { path: ^/profile, roles: ROLE_USER }
+       - { path: ^/user, roles: ROLE_USER}
+#       - { path: ^/profile, roles: ROLE_USER }
 
     encoders:
         App\Entity\User: bcrypt

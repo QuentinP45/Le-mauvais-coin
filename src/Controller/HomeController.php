@@ -16,23 +16,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/home", name="index")
      */
-    public function home()
+    public function homeAnonymousAction()
     {
         $offers = $this->getDoctrine()->getManager()
             ->getRepository(Offer::class)->findLastOffers();
 
-        return $this->render('home/homeMin.html.twig', [
+        return $this->render('anonymous/home.html.twig', [
             'offers' => $offers
         ]);
     }
 
     /**
-     * @Route("/admin", name="admin")
+     * @Route("/home-user", name="user")
      */
-    public function admin()
+    public function homeUserAction()
     {
-        return $this->render('admin/home.html.twig');
+        return $this->render('user/home.html.twig');
     }
 }
