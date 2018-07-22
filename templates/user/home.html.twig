@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+ 
+{% block body %}
+    {% include "user/navbar.html.twig" %}
+    Bienvenue {% if app.user.username is defined %}{{ app.user.username }} ! {% endif %}
+
+{% endblock %}
