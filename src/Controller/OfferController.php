@@ -26,4 +26,12 @@ class OfferController extends Controller
             'offers' => $offers,
         ]);
     }
+
+    /**
+     * @Route("/show-user", name="show_offer_user")
+     */
+    public function show()
+    {
+        return $this->render('user/show.html.twig');
+    }
 }
