@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    {% include "anonymous/navbar.html.twig" %}
+
+    <div class="row">
+        {% for offer in offers %}
+            <div class="col-sm-4 col-md-3">
+                <img src="http://via.placeholder.com/350x150" alt="Avatar" style="width:100%">
+                <div class="">
+                    <h4><b>{{ offer.title }}</b></h4>
+                    <p>{{ offer.details }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

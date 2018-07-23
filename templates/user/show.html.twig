@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% include "user/navbar.html.twig" %}
+
+    <div class="row text-center">
+        <div class="col-sm-8 offset-sm-2">
+            <p>Bienvenue {{ app.user.username }} , vous êtes sur la partie détails d'une offre</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 offset-sm-4">
+            <img src="http://via.placeholder.com/350x150" alt="Avatar" style="width:100%">
+            <div class="">
+                <h4><b>{{ offer.title }}</b></h4>
+                <p>{{ offer.details }}</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
