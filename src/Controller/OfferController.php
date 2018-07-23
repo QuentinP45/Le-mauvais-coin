@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Offer;
+use App\Entity\User;
+use App\Form\OfferType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -38,6 +41,31 @@ class OfferController extends Controller
 
         return $this->render('user/show.html.twig', [
             'offer' => $offer
+        ]);
+    }
+
+    /**
+     * @Route("/new-user", name="new_offer_user")
+     * @Method({"GET", "POST"})
+     */
+    public function new(Request $request)
+    {
+        $offer = new Offer();
+        $user = $this->getUser();
+        $offer->setCreator($user);
+        $form = $this->createForm(OfferType::class, $offer);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($offer);
+            $em->flush();
+        }
+
+        return $this->render('user/new.html.twig', [
+            'offer' => $offer,
+            'form' => $form->createView(),
         ]);
     }
 }
