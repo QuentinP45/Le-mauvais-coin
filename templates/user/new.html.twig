@@ -9,5 +9,13 @@
             <p>Bienvenue {{ app.user.username }} , vous êtes sur la partie création d'une offre</p>
         </div>
     </div>
+    <div class="row text-center">
+        <div class="col-sm-8 offset-sm-2">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <p><input class="btn btn-light"type="submit" value="Créer"></p>
+            {{ form_end(form) }}
+        </div>
+    </div>
 
 {% endblock %}

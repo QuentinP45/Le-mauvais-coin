@@ -36,6 +36,12 @@ class Offer
      */
     private $category;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="creators")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $creator;
+
     public function getId()
     {
         return $this->id;
@@ -85,6 +91,18 @@ class Offer
     public function setCategory(string $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getCreator(): ?User
+    {
+        return $this->creator;
+    }
+
+    public function setCreator(?User $creator): self
+    {
+        $this->creator = $creator;
 
         return $this;
     }
