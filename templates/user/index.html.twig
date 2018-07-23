@@ -13,10 +13,11 @@
         {% for offer in offers %}
             <div class="col-sm-4 col-md-3">
                 <img src="http://via.placeholder.com/350x150" alt="Avatar" style="width:100%">
-                <div class="">
-                    <h4><b>{{ offer.title }}</b></h4>
-                    <p>{{ offer.details }}</p>
-                </div>
+                <a href="{{ path('show_offer_user', {'id': offer.id }) }}">
+                    <div class="">
+                        <h4><b>{{ offer.title }}</b></h4>
+                    </div>
+                </a>
             </div>
         {% endfor %}
     </div>

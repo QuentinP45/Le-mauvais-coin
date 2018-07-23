@@ -28,10 +28,16 @@ class OfferController extends Controller
     }
 
     /**
-     * @Route("/show-user", name="show_offer_user")
+     * @Route("/show-user/{id}", name="show_offer_user")
+     * @Method("GET")
      */
-    public function show()
+    public function show(Offer $offer)
     {
-        return $this->render('user/show.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $offer = $em->getRepository(Offer::class)->find($offer);
+
+        return $this->render('user/show.html.twig', [
+            'offer' => $offer
+        ]);
     }
 }
