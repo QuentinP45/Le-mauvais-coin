@@ -1,22 +1,23 @@
 {% extends 'base.html.twig' %}
- 
+
 {% block body %}
 
     {% include "user/navbar.html.twig" %}
 
     <div class="row text-center">
         <div class="col-sm-8 offset-sm-2">
-            <p>Bienvenue {% if app.user.username is defined %}{{ app.user.username }} {% endif %}, vous êtes sur la partie accueil</p>
+            <p>Bienvenue {{ app.user.username }} , vous êtes sur la partie liste des offres</p>
         </div>
     </div>
     <div class="row">
         {% for offer in offers %}
             <div class="col-sm-4 col-md-3">
                 <img src="http://via.placeholder.com/350x150" alt="Avatar" style="width:100%">
-                <div class="">
-                    <h4><b>{{ offer.title }}</b></h4>
-                    <p>{{ offer.details }}</p>
-                </div>
+                <a href="{{ path('show_offer_user', {'id': offer.id }) }}">
+                    <div class="">
+                        <h4><b>{{ offer.title }}</b></h4>
+                    </div>
+                </a>
             </div>
         {% endfor %}
     </div>

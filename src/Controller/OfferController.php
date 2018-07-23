@@ -2,18 +2,42 @@
 
 namespace App\Controller;
 
+use App\Entity\Offer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * Offer controller
+ * @Route("offer")
+ */
 class OfferController extends Controller
 {
     /**
-     * @Route("/offer", name="offer")
+     * @Route("/list-user", name="index_offers_user")
+     * @Method("GET")
      */
     public function index()
     {
-        return $this->render('offer/index.html.twig', [
-            'controller_name' => 'OfferController',
+        $em = $this->getDoctrine()->getManager();
+        $offers = $em->getRepository(Offer::class)->findAll();
+
+        return $this->render('user/index.html.twig', [
+            'offers' => $offers,
+        ]);
+    }
+
+    /**
+     * @Route("/show-user/{id}", name="show_offer_user")
+     * @Method("GET")
+     */
+    public function show(Offer $offer)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $offer = $em->getRepository(Offer::class)->find($offer);
+
+        return $this->render('user/show.html.twig', [
+            'offer' => $offer
         ]);
     }
 }

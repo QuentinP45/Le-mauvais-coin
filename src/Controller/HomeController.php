@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/home", name="index")
+     * @Route("/home", name="home_anonymous")
      */
     public function homeAnonymousAction()
     {
@@ -29,10 +29,15 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/home-user", name="user")
+     * @Route("/home-user", name="home_user")
      */
     public function homeUserAction()
     {
-        return $this->render('user/home.html.twig');
+        $offers = $this->getDoctrine()->getManager()
+            ->getRepository(Offer::class)->findLastOffers();
+
+        return $this->render('user/home.html.twig', [
+            'offers' => $offers
+        ]);
     }
 }
