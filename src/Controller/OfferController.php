@@ -40,4 +40,13 @@ class OfferController extends Controller
             'offer' => $offer
         ]);
     }
+
+    /**
+     * @Route("/new-user", name="new_offer_user")
+     * @Method({"GET", "POST"})
+     */
+    public function new()
+    {
+        return $this->render('user/new.html.twig');
+    }
 }
