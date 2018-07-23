@@ -9,5 +9,26 @@
             <p>Bienvenue {{ app.user.username }} , vous êtes sur la partie dédiée à l'utilisateur</p>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <h1>Mes annonces</h1>
+        </div>
+    </div>
+    <div class="row">
+        {% for userOffer in userOffers %}
+            <div class="col-sm-4 col-md-3">
+                <img src="http://via.placeholder.com/350x150" alt="Avatar" style="width:100%">
+                <div class="">
+                    <h2><b>{{ userOffer.title }}</b></h2>
+                    <p>{{ userOffer.details }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col">
+            <a href="{{ path('new_offer_user') }}"><h1>Déposer une annonces</h1></a>
+        </div>
+    </div>
 
 {% endblock %}

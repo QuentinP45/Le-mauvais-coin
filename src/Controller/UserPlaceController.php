@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Offer;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -18,6 +19,12 @@ class UserPlaceController extends AbstractController
      */
     public function userPlace()
     {
-        return $this->render('user/userPlace.html.twig');
+        $user = $this->getUser();
+        $userOffers = $this->getDoctrine()->getManager()
+            ->getRepository(Offer::class)->findUserOffers($user);
+
+        return $this->render('user/userPlace.html.twig', [
+            'userOffers' => $userOffers
+        ]);
     }
 }
