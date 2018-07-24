@@ -31,4 +31,15 @@ class OfferRepository extends ServiceEntityRepository
 
         return $qb->execute();
     }
+
+    public function findUserOffers($user): array
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->andWhere('o.creator = :user')
+            ->setParameter('user', $user)
+            ->orderBy('o.id', 'DESC')
+            ->getQuery();
+
+        return $qb->execute();
+    }
 }

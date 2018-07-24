@@ -43,29 +43,4 @@ class OfferController extends Controller
             'offer' => $offer
         ]);
     }
-
-    /**
-     * @Route("/new-user", name="new_offer_user")
-     * @Method({"GET", "POST"})
-     */
-    public function new(Request $request)
-    {
-        $offer = new Offer();
-        $user = $this->getUser();
-        $offer->setCreator($user);
-        $form = $this->createForm(OfferType::class, $offer);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($offer);
-            $em->flush();
-        }
-
-        return $this->render('user/new.html.twig', [
-            'offer' => $offer,
-            'form' => $form->createView(),
-        ]);
-    }
 }
