@@ -42,4 +42,14 @@ class OfferRepository extends ServiceEntityRepository
 
         return $qb->execute();
     }
+
+    public function searchOffers($title): array
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->andWhere('o.title LIKE :title')
+            ->setParameter('title', "%$title%")
+            ->getQuery();
+
+        return $qb->execute();
+    }
 }
