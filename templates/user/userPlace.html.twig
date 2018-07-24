@@ -27,7 +27,15 @@
     </div>
     <div class="row">
         <div class="col">
-            <a href="{{ path('new_offer_user') }}"><h1>Déposer une annonces</h1></a>
+            <h1>Déposer une annonces</h1>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-sm-8 offset-sm-2">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <p><input class="btn btn-light"type="submit" value="Créer"></p>
+            {{ form_end(form) }}
         </div>
     </div>
 
