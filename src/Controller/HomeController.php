@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use App\Entity\Offer;
+use App\Form\ResearchType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -33,11 +34,14 @@ class HomeController extends AbstractController
      */
     public function homeUserAction()
     {
+        $search = $this->createForm(ResearchType::class);
+
         $offers = $this->getDoctrine()->getManager()
             ->getRepository(Offer::class)->findLastOffers();
 
         return $this->render('user/home.html.twig', [
-            'offers' => $offers
+            'offers' => $offers,
+            'search' => $search->createView(),
         ]);
     }
 }

@@ -9,6 +9,9 @@
             <p>Bienvenue {% if app.user.username is defined %}{{ app.user.username }} {% endif %}, vous êtes sur la partie accueil</p>
         </div>
     </div>
+
+    {{ include('user/searchbar.html.twig') }}
+
     <div class="row">
         {% for offer in offers %}
             <div class="col-sm-4 col-md-3">
